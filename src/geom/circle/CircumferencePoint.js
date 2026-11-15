@@ -4,10 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector2 = require('../../math/Vector2');
+var PointFromAngle = require('../PointFromAngle');
 
 /**
- * Returns a Vector2 object containing the coordinates of a point on the circumference of the Circle based on the given angle.
+ * Returns a Vector2 containing the coordinates of a point on the circumference of the Circle based on the given angle.
  *
  * @function Phaser.Geom.Circle.CircumferencePoint
  * @since 3.0.0
@@ -22,12 +22,7 @@ var Vector2 = require('../../math/Vector2');
  */
 var CircumferencePoint = function (circle, angle, out)
 {
-    if (out === undefined) { out = new Vector2(); }
-
-    out.x = circle.x + (circle.radius * Math.cos(angle));
-    out.y = circle.y + (circle.radius * Math.sin(angle));
-
-    return out;
+    return PointFromAngle(circle.x, circle.y, circle.radius, circle.radius, angle, out);
 };
 
 module.exports = CircumferencePoint;

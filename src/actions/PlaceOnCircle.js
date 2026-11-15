@@ -4,6 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
+var PointFromAngle = require('../geom/PointFromAngle');
+
 /**
  * Takes an array of Game Objects and positions them on evenly spaced points around the perimeter of a Circle.
  *
@@ -35,8 +37,7 @@ var PlaceOnCircle = function (items, circle, startAngle, endAngle)
 
     for (var i = 0; i < items.length; i++)
     {
-        items[i].x = cx + (radius * Math.cos(angle));
-        items[i].y = cy + (radius * Math.sin(angle));
+        PointFromAngle(cx, cy, radius, radius, angle, items[i]);
 
         angle += angleStep;
     }

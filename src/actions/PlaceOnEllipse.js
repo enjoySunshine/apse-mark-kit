@@ -4,6 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
+var PointFromAngle = require('../geom/PointFromAngle');
+
 /**
  * Takes an array of Game Objects and positions them on evenly spaced points around the perimeter of an Ellipse.
  *
@@ -37,8 +39,7 @@ var PlaceOnEllipse = function (items, ellipse, startAngle, endAngle)
 
     for (var i = 0; i < items.length; i++)
     {
-        items[i].x = ellipse.x + a * Math.cos(angle);
-        items[i].y = ellipse.y + b * Math.sin(angle);
+        PointFromAngle(ellipse.x, ellipse.y, a, b, angle, items[i]);
 
         angle += angleStep;
     }

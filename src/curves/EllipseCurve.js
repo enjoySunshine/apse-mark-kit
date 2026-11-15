@@ -10,6 +10,7 @@ var Class = require('../utils/Class');
 var Curve = require('./Curve');
 var DegToRad = require('../math/DegToRad');
 var GetValue = require('../utils/object/GetValue');
+var PointFromAngle = require('../geom/PointFromAngle');
 var RadToDeg = require('../math/RadToDeg');
 var Vector2 = require('../math/Vector2');
 
@@ -240,23 +241,23 @@ var EllipseCurve = new Class({
         }
 
         var angle = this._startAngle + t * deltaAngle;
-        var x = this.p0.x + this._xRadius * Math.cos(angle);
-        var y = this.p0.y + this._yRadius * Math.sin(angle);
+
+        PointFromAngle(this.p0.x, this.p0.y, this._xRadius, this._yRadius, angle, out);
 
         if (this._rotation !== 0)
         {
             var cos = Math.cos(this._rotation);
             var sin = Math.sin(this._rotation);
 
-            var tx = x - this.p0.x;
-            var ty = y - this.p0.y;
+            var tx = out.x - this.p0.x;
+            var ty = out.y - this.p0.y;
 
             // Rotate the point about the center of the ellipse.
-            x = tx * cos - ty * sin + this.p0.x;
-            y = tx * sin + ty * cos + this.p0.y;
+            out.x = tx * cos - ty * sin + this.p0.x;
+            out.y = tx * sin + ty * cos + this.p0.y;
         }
 
-        return out.set(x, y);
+        return out;
     },
 
     /**

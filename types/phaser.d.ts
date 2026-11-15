@@ -79705,6 +79705,26 @@ declare namespace Phaser {
 
         }
 
+        /**
+         * Returns a Vector2 containing the coordinates of a point on the circumference of a Circle or Ellipse,
+         * based on the given angle.
+         *
+         * This is the single place where a circumference point is derived from an angle. The Circle and Ellipse
+         * `CircumferencePoint` functions, the `PlaceOnCircle` and `PlaceOnEllipse` Actions, and the
+         * `Phaser.Curves.Ellipse` curve all call this function, so any change to the way the coordinates are
+         * calculated from the angle is reflected in all of them at once.
+         *
+         * A Circle is treated as an Ellipse with both radii set to its radius.
+         * @param x The x position of the center of the shape.
+         * @param y The y position of the center of the shape.
+         * @param radiusX The horizontal radius of the shape. For a Circle, this is its radius.
+         * @param radiusY The vertical radius of the shape. For a Circle, this is its radius.
+         * @param angle The angle from the center of the shape, given in radians.
+         * @param out A Vector2 to store the results in. If not given a Vector2 will be created.
+         * @returns A Vector2 object where the `x` and `y` properties are the point on the circumference.
+         */
+        function PointFromAngle<O extends Phaser.Math.Vector2>(x: number, y: number, radiusX: number, radiusY: number, angle: number, out?: O): O;
+
         namespace Intersects {
             /**
              * Checks if two Circles intersect.

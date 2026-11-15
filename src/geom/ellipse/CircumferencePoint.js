@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector2 = require('../../math/Vector2');
+var PointFromAngle = require('../PointFromAngle');
 
 /**
  * Returns a Vector2 containing the coordinates of a point on the circumference of the Ellipse based on the given angle.
@@ -22,15 +22,7 @@ var Vector2 = require('../../math/Vector2');
  */
 var CircumferencePoint = function (ellipse, angle, out)
 {
-    if (out === undefined) { out = new Vector2(); }
-
-    var halfWidth = ellipse.width / 2;
-    var halfHeight = ellipse.height / 2;
-
-    out.x = ellipse.x + halfWidth * Math.cos(angle);
-    out.y = ellipse.y + halfHeight * Math.sin(angle);
-
-    return out;
+    return PointFromAngle(ellipse.x, ellipse.y, ellipse.width / 2, ellipse.height / 2, angle, out);
 };
 
 module.exports = CircumferencePoint;
